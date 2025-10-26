@@ -1,7 +1,639 @@
-﻿echo "# repositorio-pablo-munoz-vega" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/Pablomvega/repositorio-pablo-munoz-vega.git
-git push -u origin main
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repositorio Digital - U.E. Pablo Muñoz Vega</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e5799 0%, #207cca 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #1e5799;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .admin-access {
+            margin-top: 1rem;
+        }
+        
+        .admin-btn {
+            background-color: #ffc107;
+            color: #333;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .admin-btn:hover {
+            background-color: #e0a800;
+        }
+        
+        main {
+            padding: 3rem 0;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .intro h2 {
+            color: #1e5799;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .user-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .category {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #1e5799;
+        }
+        
+        .category h3 {
+            color: #1e5799;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .documents-list {
+            list-style-type: none;
+        }
+        
+        .documents-list li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .documents-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .documents-list a {
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            flex-grow: 1;
+        }
+        
+        .documents-list a:hover {
+            color: #1e5799;
+        }
+        
+        .documents-list a::before {
+            content: "📄";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        .delete-btn:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        footer {
+            background-color: #1e5799;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        
+        .modal-header h2 {
+            color: #1e5799;
+            margin: 0;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: white;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #1e5799;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #16457a;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-input-label {
+            display: block;
+            padding: 0.75rem;
+            background-color: #f8f9fa;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .file-input-label:hover {
+            background-color: #e9ecef;
+        }
+        
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .user-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">U.E.</div>
+                <div>
+                    <h1>Unidad Educativa Fiscal "Pablo Muñoz Vega"</h1>
+                    <p class="subtitle">Repositorio Digital de Documentos Institucionales</p>
+                </div>
+            </div>
+            <div class="admin-access">
+                <button class="admin-btn" id="openAdminPanel">
+                    <i class="fas fa-cog"></i> Panel de Administración
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="intro">
+                <h2>Bienvenido al Repositorio Digital</h2>
+                <p>En esta página podrá encontrar y descargar los formatos de documentos institucionales que regularmente se utilizan en nuestra comunidad educativa.</p>
+                <p>Seleccione su categoría para acceder a los documentos correspondientes.</p>
+            </section>
+            
+            <section class="user-categories">
+                <div class="category">
+                    <div class="category-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Padres de Familia</h3>
+                    <ul class="documents-list" id="parents-documents">
+                        <li>
+                            <a href="FORMULARIO DE VACACIONES 2023(1).docx" download>
+                                <i class="fas fa-file"></i> Formulario de Vacaciones
+                            </a>
+                            <button class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category">
+                    <div class="category-icon">🎓</div>
+                    <h3>Estudiantes</h3>
+                    <ul class="documents-list" id="students-documents">
+                        <li>
+                            <a href="CERTIFICADO DE NO ASISTENCIA 24-25.docx" download>
+                                <i class="fas fa-file"></i> Certificado de No Asistencia
+                            </a>
+                            <button class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="category">
+                    <div class="category-icon">👩‍🏫</div>
+                    <h3>Docentes</h3>
+                    <ul class="documents-list" id="teachers-documents">
+                        <li>
+                            <a href="SOLICITUD LICENCIA SIN REMUNERACIÓN.docx" download>
+                                <i class="fas fa-file"></i> Solicitud de Licencia
+                            </a>
+                            <button class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Unidad Educativa Fiscal "Pablo Muñoz Vega"</p>
+                <p class="contact-info">Dirección: Av. Principal 123, Ciudad | Teléfono: (04) 234-5678 | Email: contacto@pablomunozvega.edu.ec</p>
+                <p class="contact-info">&copy; 2023 - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modal para agregar documentos -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Panel de Administración</h2>
+                <button class="close-btn" id="closeAdminModal">&times;</button>
+            </div>
+            <form id="documentForm">
+                <div class="form-group">
+                    <label for="documentName">Nombre del documento</label>
+                    <input type="text" id="documentName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="documentCategory">Categoría</label>
+                    <select id="documentCategory" class="form-select" required>
+                        <option value="">Seleccione una categoría</option>
+                        <option value="parents">Padres de Familia</option>
+                        <option value="students">Estudiantes</option>
+                        <option value="teachers">Docentes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="documentFile">Archivo (PDF, Word, Excel)</label>
+                    <div class="file-input-container">
+                        <input type="file" id="documentFile" class="file-input" accept=".pdf,.doc,.docx,.xls,.xlsx" required>
+                        <div class="file-input-label">
+                            <i class="fas fa-cloud-upload-alt"></i> Seleccionar archivo
+                        </div>
+                    </div>
+                    <div class="file-name" id="fileName">Ningún archivo seleccionado</div>
+                </div>
+                
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-primary">Agregar Documento</button>
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo para los documentos
+        let documents = [
+            { id: 1, name: "Formulario de Vacaciones", category: "parents", fileName: "FORMULARIO DE VACACIONES 2023(1).docx" },
+            { id: 2, name: "Certificado de No Asistencia", category: "students", fileName: "CERTIFICADO DE NO ASISTENCIA 24-25.docx" },
+            { id: 3, name: "Solicitud de Licencia", category: "teachers", fileName: "SOLICITUD LICENCIA SIN REMUNERACIÓN.docx" }
+        ];
+
+        // Elementos del DOM
+        const parentsList = document.getElementById('parents-documents');
+        const studentsList = document.getElementById('students-documents');
+        const teachersList = document.getElementById('teachers-documents');
+        const adminModal = document.getElementById('adminModal');
+        const openAdminBtn = document.getElementById('openAdminPanel');
+        const closeAdminBtn = document.getElementById('closeAdminModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const documentForm = document.getElementById('documentForm');
+        const documentFile = document.getElementById('documentFile');
+        const fileName = document.getElementById('fileName');
+
+        // Mostrar el modal de administración
+        openAdminBtn.addEventListener('click', () => {
+            adminModal.style.display = 'flex';
+        });
+
+        // Cerrar el modal de administración
+        closeAdminBtn.addEventListener('click', () => {
+            adminModal.style.display = 'none';
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            adminModal.style.display = 'none';
+        });
+
+        // Cerrar modal al hacer clic fuera de él
+        window.addEventListener('click', (e) => {
+            if (e.target === adminModal) {
+                adminModal.style.display = 'none';
+            }
+        });
+
+        // Mostrar nombre del archivo seleccionado
+        documentFile.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileName.textContent = e.target.files[0].name;
+            } else {
+                fileName.textContent = 'Ningún archivo seleccionado';
+            }
+        });
+
+        // Agregar nuevo documento
+        documentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('documentName').value;
+            const category = document.getElementById('documentCategory').value;
+            const file = documentFile.files[0];
+            
+            if (!name || !category || !file) {
+                alert('Por favor, complete todos los campos');
+                return;
+            }
+            
+            // Crear un nuevo documento
+            const newDocument = {
+                id: documents.length + 1,
+                name: name,
+                category: category,
+                fileName: file.name
+            };
+            
+            documents.push(newDocument);
+            renderDocuments();
+            
+            // Limpiar el formulario
+            documentForm.reset();
+            fileName.textContent = 'Ningún archivo seleccionado';
+            
+            // Cerrar el modal
+            adminModal.style.display = 'none';
+            
+            alert('Documento agregado exitosamente');
+        });
+
+        // Eliminar documento
+        function deleteDocument(id) {
+            if (confirm('¿Está seguro de que desea eliminar este documento?')) {
+                documents = documents.filter(doc => doc.id !== id);
+                renderDocuments();
+                alert('Documento eliminado exitosamente');
+            }
+        }
+
+        // Renderizar documentos en las listas
+        function renderDocuments() {
+            // Limpiar listas
+            parentsList.innerHTML = '';
+            studentsList.innerHTML = '';
+            teachersList.innerHTML = '';
+            
+            // Agregar documentos a las listas correspondientes
+            documents.forEach(doc => {
+                const listItem = document.createElement('li');
+                
+                const link = document.createElement('a');
+                link.href = doc.fileName;
+                link.download = doc.fileName;
+                link.innerHTML = `<i class="fas fa-file"></i> ${doc.name}`;
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteBtn.addEventListener('click', () => deleteDocument(doc.id));
+                
+                listItem.appendChild(link);
+                listItem.appendChild(deleteBtn);
+                
+                switch(doc.category) {
+                    case 'parents':
+                        parentsList.appendChild(listItem);
+                        break;
+                    case 'students':
+                        studentsList.appendChild(listItem);
+                        break;
+                    case 'teachers':
+                        teachersList.appendChild(listItem);
+                        break;
+                }
+            });
+            
+            // Si no hay documentos en una categoría, mostrar mensaje
+            if (parentsList.children.length === 0) {
+                parentsList.innerHTML = '<li>No hay documentos disponibles</li>';
+            }
+            if (studentsList.children.length === 0) {
+                studentsList.innerHTML = '<li>No hay documentos disponibles</li>';
+            }
+            if (teachersList.children.length === 0) {
+                teachersList.innerHTML = '<li>No hay documentos disponibles</li>';
+            }
+        }
+
+        // Inicializar la página
+        renderDocuments();
+    </script>
+</body>
+</html>
